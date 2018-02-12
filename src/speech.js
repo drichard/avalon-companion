@@ -24,8 +24,6 @@ const speak = (text) => {
   msg.pitch = 0.9;
   msg.rate = 0.9;
   synth.speak(msg);
-  
-  return msg;
 }
 
 function pause(seconds) {
@@ -80,7 +78,7 @@ const badGuysRevealToYoda = (numPlayers) => {
     numHands = 'two'
   }
 
-  return `${characters} open your hands and wiggle your fingers.
+  return `${characters}, open your hands and wiggle your fingers.
     Yoda, open your eyes and see ${numHands} open hands. These are all the bad guys except for Darth Sidius who you cannot see.`;
 };
 
@@ -91,14 +89,15 @@ const closeEverything = () => pick([
   `Everyone, close everything.`
 ]);
 
-const anakinsReveal = () => `Bad Anakin and good Anakin open your hands. Padmé open your eyes and see the two Anakins.`
+const anakinsReveal = () => `Bad Anakin and good Anakin, open your hands. Padmé open your eyes and see the two Anakins.`
 
-const obiwanReveal = () => `Darth Sidius and Yoda open your hands. Obi Wan, open your eyes and see two open hands.
+const obiwanReveal = () => `Darth Sidius and Yoda, open your hands. Obi Wahn, open your eyes and see two open hands.
 One of them is Yoda, the other one is Darth Sidius.`;
 
 const openEyes = () => `Everyone, please open your eyes.`;
 
 export function start(numPlayers) {
+  speak(obiwanReveal());
   initVoices();
 
   speak(intro());
@@ -109,19 +108,23 @@ export function start(numPlayers) {
   speak(badAnakinReveal());
   pause(3);
   speak(closeEverything());
+  pause(1);
 
   speak(badGuysRevealToYoda(numPlayers));
   pause(3);
   speak(closeEverything());
+  pause(1);
 
   speak(anakinsReveal());
   pause(3);
   speak(closeEverything());
+  pause(1);
 
   speak(obiwanReveal());
   pause(3);
   speak(closeEverything());
   pause(2);
+
   speak(openEyes());
 }
 
