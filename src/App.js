@@ -17,7 +17,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      numPlayers: 7,
+      numPlayers: 9,
       isSpeaking: false,
       startingPlayer: null
     };

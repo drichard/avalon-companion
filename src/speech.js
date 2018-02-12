@@ -27,6 +27,8 @@ const speak = (text) => {
 }
 
 function pause(seconds) {
+  console.log(currentMsg);
+  
   currentMsg.onend = function () {
     // iOS hack: pause on next tick, otherwise it doesn't pause
     setTimeout(() => {
@@ -35,7 +37,7 @@ function pause(seconds) {
       setTimeout(() => {
         synth.resume();
       }, seconds * 1000);
-    });
+    }, 10);
   }
 }
 
@@ -51,20 +53,17 @@ const intro = () => pick([
 
 const badGuysRevealEachOther = (numPlayers) => {
   let characters;
-  let pairsOfEyes;
 
   if (numPlayers === 10) {
     characters = 'Darth Sidius, Asaj the Assassin, and Jango Fat';
-    pairsOfEyes = 'two pairs';
   } else {
     characters = 'Darth Sidius and Asaj the Assassin'
-    pairsOfEyes = 'one pair'
   }
 
-  return `${characters}, open your eyes and look around to see the agents of evil.
-You should see ${pairsOfEyes} of eyes. If not, then the game is broken, please let the group know.`;
+  return `${characters}, open your eyes and look around to see the agents of evil.`;
 };
 
+const badAnakinReveal = () => `Bad Anakin, keep your eyes closed but open your hand and wiggle your fingers, so that the bad guys will know of you.`
 
 const badGuysRevealToYoda = (numPlayers) => {
   let characters;
@@ -78,11 +77,9 @@ const badGuysRevealToYoda = (numPlayers) => {
     numHands = 'two'
   }
 
-  return `${characters}, open your hands and wiggle your fingers.
-    Yoda, open your eyes and see ${numHands} open hands. These are all the bad guys except for Darth Sidius who you cannot see.`;
+  return `${characters}, open your hands and wiggle your fingers, so Yoda will know of you.
+    Yoda, open your eyes and see ${numHands} open hands. Those are the bad guys.`;
 };
-
-const badAnakinReveal = () => `Bad Anakin open your hand and wiggle your fingers so that the bad guys can see you.`;
 
 const closeEverything = () => pick([
   `Everyone, close your eyes and hands.`,
@@ -92,19 +89,18 @@ const closeEverything = () => pick([
 const anakinsReveal = () => `Bad Anakin and good Anakin, open your hands. Padmé open your eyes and see the two Anakins.`
 
 const obiwanReveal = () => `Darth Sidius and Yoda, open your hands. Obi Wahn, open your eyes and see two open hands.
-One of them is Yoda, the other one is Darth Sidius.`;
+One of those is Yoda, the other one is Darth Sidius.`;
 
 const openEyes = () => `Everyone, please open your eyes.`;
 
 export function start(numPlayers) {
-  speak(obiwanReveal());
   initVoices();
 
   speak(intro());
   pause(2);
 
   speak(badGuysRevealEachOther(numPlayers));
-  pause(4);
+  pause(3);
   speak(badAnakinReveal());
   pause(3);
   speak(closeEverything());
